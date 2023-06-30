@@ -1,0 +1,35 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "asdb-jobs"
+authors = [{name = "Kai Blin", email = "kblin@biosustain.dtu.dk"}]
+readme = "README.md"
+dynamic = ["version", "description"]
+dependencies = [
+    "aio-standalone >=0.2",
+    "aiopg[sa]",
+    "tomlkit; python_version < '3.11'"
+]
+licence = {file = "LICENCE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pylint",
+]
+
+[project.urls]
+Home = "https://github.com/antismash/asdb-jobs"
+
+[project.scripts]
+asdb-jobs = "asdb_jobs.__main__:main"
