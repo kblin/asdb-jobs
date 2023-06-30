@@ -13,7 +13,7 @@ import subprocess
 from aiostandalone import StandaloneApplication
 
 from .blast import (
-    BlastResult,
+    ClusterBlastResult,
     ComparippsonResult,
     parse_blast,
 )
@@ -182,7 +182,7 @@ async def handle_clusterblast(app: StandaloneApplication, job: Job):
 
     results = [] 
     for blast_res in parse_blast(stdout):
-        results.append(blast_res.to_json())
+        results.append(ClusterBlastResult.from_blast(blast_res).to_json())
 
     job.results = {"hits": results}
     await job.commit()

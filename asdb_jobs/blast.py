@@ -103,3 +103,45 @@ class ComparippsonResult:
     def to_json(self) -> dict[str, Any]:
         """Convert to a JSON-able datastructure"""
         return asdict(self)
+
+
+@dataclass
+class ClusterBlastResult:
+    q_acc: str
+    s_locus: str
+    s_description: str
+    s_acc: str
+    s_rec_start: str
+    s_rec_end: str
+    identity: float
+    q_seq: str
+    q_start: int
+    q_end: int
+    q_len: int
+    s_seq: str
+    s_start: int
+    s_end: int
+    s_len: int
+
+    @classmethod
+    def from_blast(cls, blast: BlastResult) -> "ClusterBlastResult":
+        """Load from a BlastResult"""
+        data = blast.s_acc.split("|")
+        if len(data) != 7:
+            raise ValueError(f"unexpected blast s_acc field {blast.s_acc}")
+        s_locus = data[4]
+        s_description = data[5].replace("_", " ")
+        s_acc = data[0]
+        s_rec_start, s_rec_end = data[2].split("-")
+
+        return cls(
+            blast.q_acc,
+            s_locus, s_description, s_acc, s_rec_start, s_rec_end,
+            blast.identity,
+            blast.q_seq, blast.q_start, blast.q_end, blast.q_len,
+            blast.s_seq, blast.s_start, blast.s_end, blast.s_len,
+        )
+
+    def to_json(self) -> dict[str, Any]:
+        """Convert to a JSON-able datastructure"""
+        return asdict(self)
