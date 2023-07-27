@@ -129,6 +129,8 @@ async def handle_comparippson(app: StandaloneApplication, job: Job) :
     for blast_res in parse_blast(stdout):
         results.append(ComparippsonResult.from_blast(blast_res, metadata).to_json())
 
+    results.sort(key=lambda e: e["identity"], reverse=True)
+
     job.results = {"hits": results}
     await job.commit()
 
