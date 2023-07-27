@@ -50,7 +50,7 @@ def main():
     config.read_config()
     app['conf'] = config
 
-    comparippson_metadata_file = config.db_dir / "comparippson" / "3.9" / "asdb" / "metadata.json"
+    comparippson_metadata_file = config.db_dir / "comparippson" / "asdb" / "3.9" / "metadata.json"
     with comparippson_metadata_file.open("r", encoding="utf-8") as handle:
         metadata = json.load(handle)
     app['comparippson_metadata'] = metadata

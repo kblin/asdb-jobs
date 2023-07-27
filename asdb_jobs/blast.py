@@ -37,11 +37,11 @@ class BlastResult:
         q_start = int(parts[4])
         q_end = int(parts[5])
         q_len = int(parts[6])
-        identity = round((nident / q_len) * 100)
         s_seq = parts[7]
         s_start = int(parts[8])
         s_end = int(parts[9])
         s_len = int(parts[10])
+        identity = round((nident / max(q_len, s_len)) * 100)
 
         return cls(
             q_acc, s_acc, identity,
