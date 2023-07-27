@@ -89,7 +89,7 @@ async def handle_comparippson(app: StandaloneApplication, job: Job) :
         "docker.io/antismash/asdb-jobs:latest",
         "blastp",
         "-num_threads", "4",
-        "-db", "/databases/comparippson/3.9/asdb/cores.fa",
+        "-db", "/databases/comparippson/asdb/3.9/cores.fa",
         "-outfmt", "6 qacc sacc nident qseq qstart qend qlen sseq sstart send slen",
     ]
 
